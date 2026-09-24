@@ -19,13 +19,19 @@ export default function Navbar({ planCount = 0, savedCount = 0 }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
         
         <Link href="/" className="flex items-center gap-3 group">
-          
+            <Image
+            src="/assets/logo.png"
+            alt="FitLog Logo"
+            width={32}
+            height={32}
+            className="w-8 h-8 object-contain"
+          />
           <span className="text-xl font-black tracking-widest text-white uppercase">
             FIT<span >LOG</span>
           </span>
         </Link>
 
-        <div className="flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8">
           <Link
             href="/"
             className={`text-sm font-semibold transition-colors uppercase tracking-wider ${
