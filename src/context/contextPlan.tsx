@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Workout } from "@/component/library";
-import toast from "react-hot-toast"; 
+import { toast } from "react-toastify";
 
 
 interface PlanContextType {
@@ -82,7 +82,7 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
         setDoneIds(updated);
         localStorage.setItem("fitlog_done", JSON.stringify(updated));
          if (isAlreadyDone) {
-            toast("Marked as incomplete", { icon: "↩️" });
+            toast("Marked as incomplete");
         } else {
             toast.success("Workout completed! Great job!");
         }

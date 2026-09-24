@@ -38,7 +38,7 @@ export default async function Library() {
 
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {workouts.map((work) => (
+          {workouts.slice(0,12).map((work) => (
             <Link
               key={work.id}
               href={`/workout/${work.id}`}
