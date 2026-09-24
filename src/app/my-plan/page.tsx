@@ -174,19 +174,20 @@ export default function MyPlanPage() {
                     View Details
                   </Link>
 
-                  {activeTab === "today" && (
-                    <button
-                      onClick={() => toggleDone(workout.id)}
-                      className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
-                        isDone
-                          ? "bg-[#ccff00] text-black shadow-md shadow-[#ccff00]/10"
-                          : "border border-[#1e232d] bg-[#1a1d26] text-gray-300 hover:text-white hover:border-gray-500"
-                      }`}
-                    >
-                      <Check className="w-3.5 h-3.5 stroke-[3]" />
-                      <span>{isDone ? "Done" : "Mark Done"}</span>
-                    </button>
-                  )}
+                {activeTab === "today" && (
+  <button
+    onClick={() => toggleDone(workout.id)}
+    className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer active:scale-95 ${
+      isDone
+        ? "bg-[#ccff00] text-black shadow-lg shadow-[#ccff00]/20"
+        : "border border-[#1e232d]/50 bg-[#1a1d26] text-gray-300 hover:bg-[#ccff00] hover:text-black"
+    }`}
+  >
+    <Check className="w-3.5 h-3.5 stroke-[3]" />
+    <span>{isDone ? "Done" : "Mark Done"}</span>
+  </button>
+)}
+
 
                   <button
                     onClick={() =>

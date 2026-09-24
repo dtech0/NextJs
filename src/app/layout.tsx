@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/component/navbar";
 import Footer from "@/component/footer";
 import { PlanProvider } from "@/context/contextPlan";
+import { Toaster } from "react-hot-toast";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,6 +28,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-screen flex flex-col bg-[#090a0d] text-white">
         <PlanProvider>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: "#12141a",
+                color: "#ffffff",
+                border: "1px solid #1e232d",
+                fontSize: "13px",
+                fontWeight: "600",
+              },
+            }}
+          />
         <Navbar />
         {children}
         <Footer />

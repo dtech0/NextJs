@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Workout } from "@/component/library";
+import toast from "react-hot-toast"; 
+
 
 interface PlanContextType {
     todayPlan: Workout[];
@@ -33,48 +35,57 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
 
     const addToPlan = (workout: Workout) => {
         if (todayPlan.some((w) => w.id === workout.id)) {
-            alert("This workout is already in today's plan!");
+            toast.error("Already in today's plan!");
             return;
         }
         if (todayPlan.length >= 5) {
-            alert("Cap of 5 lifts reached for today! Finish them first.");
+            toast.error("Cap of 5 lifts reached for today! Finish them first.");
             return;
         }
         const updated = [...todayPlan, workout];
         setTodayPlan(updated);
         localStorage.setItem("fitlog_today", JSON.stringify(updated));
-        alert(`${workout.name} added to Today's Plan!`);
+        toast.success("Added to Today's Plan!");
     };
 
     const addToSaved = (workout: Workout) => {
         if (savedPlan.some((w) => w.id === workout.id)) {
-            alert("This workout is already saved!");
+            toast.error("Already in saved list!");
             return;
         }
         const updated = [...savedPlan, workout];
         setSavedPlan(updated);
         localStorage.setItem("fitlog_saved", JSON.stringify(updated));
-        alert(`${workout.name} saved for later!`);
+        toast.success(`${workout.name} saved for later!`);
     };
 
     const removeFromPlan = (id: number) => {
         const updated = todayPlan.filter((w) => w.id !== id);
         setTodayPlan(updated);
         localStorage.setItem("fitlog_today", JSON.stringify(updated));
+        toast.success(`${removeFromPlan?.name || "Workout"} removed from plan`);
     };
 
     const removeFromSaved = (id: number) => {
         const updated = savedPlan.filter((w) => w.id !== id);
-        setSavedPlan(updated);
+        setSavedPlan(updated); 
         localStorage.setItem("fitlog_saved", JSON.stringify(updated));
+        toast.success(`${removeFromSaved?.name || "Workout removed from saved list"}`);
     };
 
     const toggleDone = (id: number) => {
+        const isAlreadyDone = doneIds.includes(id);
+
         const updated = doneIds.includes(id)
             ? doneIds.filter((item) => item !== id)
             : [...doneIds, id];
         setDoneIds(updated);
         localStorage.setItem("fitlog_done", JSON.stringify(updated));
+         if (isAlreadyDone) {
+            toast("Marked as incomplete", { icon: "↩️" });
+        } else {
+            toast.success("Workout completed! Great job!");
+        }
     };
 
     return (
