@@ -45,7 +45,7 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
         const updated = [...todayPlan, workout];
         setTodayPlan(updated);
         localStorage.setItem("fitlog_today", JSON.stringify(updated));
-        toast.success("Added to Today's Plan!");
+        toast.success(`${workout.name} added to today's plan!`);
     };
 
     const addToSaved = (workout: Workout) => {
@@ -60,17 +60,19 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
     };
 
     const removeFromPlan = (id: number) => {
+        const workout = todayPlan.find((w) => w.id === id);
         const updated = todayPlan.filter((w) => w.id !== id);
         setTodayPlan(updated);
         localStorage.setItem("fitlog_today", JSON.stringify(updated));
-        toast.success(`${removeFromPlan?.name || "Workout"} removed from plan`);
+        toast.success(`${workout?.name || "Workout"} removed from today's plan`);
     };
 
     const removeFromSaved = (id: number) => {
+        const workout = savedPlan.find((w) => w.id === id);
         const updated = savedPlan.filter((w) => w.id !== id);
         setSavedPlan(updated); 
         localStorage.setItem("fitlog_saved", JSON.stringify(updated));
-        toast.success(`${removeFromSaved?.name || "Workout removed from saved list"}`);
+        toast.success(`${workout?.name || "Workout"} removed from saved list`);
     };
 
     const toggleDone = (id: number) => {
